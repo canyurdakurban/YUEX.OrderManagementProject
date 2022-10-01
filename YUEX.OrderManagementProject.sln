@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YUEX.OrderManagenetProject.API", "YUEX.OrderManagenetProject.API\YUEX.OrderManagenetProject.API.csproj", "{506E4B57-D262-46E3-A310-528380D2D586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YUEX.OrderManagementProject.Entities", "YUEX.OrderManagementProject.Entities\YUEX.OrderManagementProject.Entities.csproj", "{7458BF91-4B03-4BF4-B0F6-CD064998B5F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YUEX.OrderManagementProject.Repository", "YUEX.OrderManagementProject.Repository\YUEX.OrderManagementProject.Repository.csproj", "{236DEDD1-6492-4B7C-A766-45AB1686B900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YUEX.OrderManagemetProject.DataAccess", "YUEX.OrderManagemetProject.DataAccess\YUEX.OrderManagemetProject.DataAccess.csproj", "{F1DB0B1A-31AB-4001-8ABB-6B1041A875D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YUEX.OrderManagemetProject.Business", "YUEX.OrderManagemetProject.Business\YUEX.OrderManagemetProject.Business.csproj", "{7F903F56-8ADC-4A05-B6C8-987C6C4D1036}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{506E4B57-D262-46E3-A310-528380D2D586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506E4B57-D262-46E3-A310-528380D2D586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506E4B57-D262-46E3-A310-528380D2D586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506E4B57-D262-46E3-A310-528380D2D586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7458BF91-4B03-4BF4-B0F6-CD064998B5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7458BF91-4B03-4BF4-B0F6-CD064998B5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7458BF91-4B03-4BF4-B0F6-CD064998B5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7458BF91-4B03-4BF4-B0F6-CD064998B5F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{236DEDD1-6492-4B7C-A766-45AB1686B900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{236DEDD1-6492-4B7C-A766-45AB1686B900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{236DEDD1-6492-4B7C-A766-45AB1686B900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{236DEDD1-6492-4B7C-A766-45AB1686B900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1DB0B1A-31AB-4001-8ABB-6B1041A875D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DB0B1A-31AB-4001-8ABB-6B1041A875D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DB0B1A-31AB-4001-8ABB-6B1041A875D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1DB0B1A-31AB-4001-8ABB-6B1041A875D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F903F56-8ADC-4A05-B6C8-987C6C4D1036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F903F56-8ADC-4A05-B6C8-987C6C4D1036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F903F56-8ADC-4A05-B6C8-987C6C4D1036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F903F56-8ADC-4A05-B6C8-987C6C4D1036}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A26D6C9-3ADF-4863-883C-3B0360A1333C}
+	EndGlobalSection
+EndGlobal
