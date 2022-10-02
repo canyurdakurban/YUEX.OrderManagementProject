@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YUEX.OrderManagementProject.Entities\YUEX.OrderManagementProject.Entities.csproj" />
-    <ProjectReference Include="..\YUEX.OrderManagementProject.DataAccess\YUEX.OrderManagementProject.DataAccess.csproj" />
+    <ProjectReference Include="..\YUEX.OrderManagemetProject.DataAccess\YUEX.OrderManagementProject.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

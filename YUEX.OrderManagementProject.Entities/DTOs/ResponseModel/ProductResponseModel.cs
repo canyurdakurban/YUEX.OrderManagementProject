@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YUEX.OrderManagementProject.Entities.IEntities;
 
 namespace YUEX.OrderManagementProject.Entities.DTOs.ResponseModel
 {
-    public class ProductResponseModel
+    public class ProductResponseModel : IDTO
     {
         public string BarcodeNumber { get; set; }
 

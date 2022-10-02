@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Threading;
 using YUEX.OrderManagementProject.Entities.IEntities;
 using YUEX.OrderManagementProject.Repository.IEntityRepository;
+using YUEX.OrderManagementProject.Entities.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Drawing;
 
 namespace YUEX.OrderManagementProject.Repository.EntityFramework
 {
     public class EfRepositoryBase<TEntity, TContext> : IEntityAsyncRepository<TEntity>, IEntityRepository<TEntity>
-    where TEntity : class, IEntity, new()
-    where TContext : DbContext, new()
+    where TEntity : BaseEntity
+    where TContext : DbContext
     {
         protected TContext Context { get; }
 
@@ -29,15 +32,14 @@ namespace YUEX.OrderManagementProject.Repository.EntityFramework
         }
 
         public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null)
-        {           
+        {
 
-            using (var context = new TContext())
-            {
-                return predicate == null
-                    ? await context.Set<TEntity>().ToListAsync()
-                    : await context.Set<TEntity>().Where(predicate).ToListAsync();
-            }
+            IQueryable<TEntity> queryable = Query();
             
+            if (predicate != null) queryable = queryable.Where(predicate);
+           
+            return await queryable.ToListAsync();
+
         }       
 
         public IQueryable<TEntity> Query()

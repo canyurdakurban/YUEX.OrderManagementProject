@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using YUEX.OrderManagemetProject.DataAccess.Contexts;
+using YUEX.OrderManagementProject.DataAccess.Contexts;
 
 namespace YUEX.OrderManagemetProject.DataAccess.Migrations
 {
-    [DbContext(typeof(OrderManagemetContext))]
-    [Migration("20221001114442_init")]
-    partial class init
+    [DbContext(typeof(OrderManagementContext))]
+    partial class OrderManagemetContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

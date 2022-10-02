@@ -6,11 +6,12 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Entities.IEntities;
 
 namespace YUEX.OrderManagementProject.Repository.IEntityRepository
 {
-    public interface IEntityAsyncRepository<T> where T : class, IEntity, new()
+    public interface IEntityAsyncRepository<T> : IQuery<T> where T : BaseEntity
     {
         Task<T> GetAsync(Expression<Func<T, bool>> predicate);
         Task<List<T>> GetListAsync(Expression<Func<T, bool>> predicate = null);

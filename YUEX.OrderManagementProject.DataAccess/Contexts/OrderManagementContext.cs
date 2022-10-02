@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using YUEX.OrderManagementProject.Entities.Entities;
 
-namespace YUEX.OrderManagemetProject.DataAccess.Contexts
+namespace YUEX.OrderManagementProject.DataAccess.Contexts
 {
-    public class OrderManagemetContext : DbContext
+    public class OrderManagementContext : DbContext
     {
-        public OrderManagemetContext(DbContextOptions<OrderManagemetContext> options) : base(options) 
+        public OrderManagementContext(DbContextOptions<OrderManagementContext> options) : base(options) 
         {
             
         }
