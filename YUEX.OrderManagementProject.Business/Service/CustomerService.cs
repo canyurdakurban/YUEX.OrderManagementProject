@@ -33,19 +33,23 @@ namespace YUEX.OrderManagementProject.Business.Service
                 throw new Exception();
             }
             else
-            {                
-                Customer customerEntity = await _customerDAL.AddAsync(_mapper.Map<Customer>(request));
+            {
+                Customer customerEntity = _mapper.Map<Customer>(request);
+                customerEntity.IsActive = true;
+                customerEntity = await _customerDAL.AddAsync(customerEntity);
+
                 CustomerResponseModel customerResponce = _mapper.Map<CustomerResponseModel>(customerEntity);
 
                 return customerResponce;
             }
 
         }
-
-        // customer delete request objesi
-        public Task Delete(Customer request)
+        
+        public async Task Delete(CustomerDeleteModel request)
         {
-            throw new NotImplementedException();
+            var result = await GetById(request.Id);
+            result.IsActive = false;
+            _customerDAL.Delete(_mapper.Map<Customer>(result));
         }
 
         public async Task<IList<CustomerResponseModel>> GetAll()
@@ -60,7 +64,9 @@ namespace YUEX.OrderManagementProject.Business.Service
 
         public async Task<CustomerResponseModel> Update(CustomerRequestModel request)
         {
-            Customer customerEntity = await _customerDAL.UpdateAsync(_mapper.Map<Customer>(request));
+            var result = await GetById(request.Id);
+
+            Customer customerEntity = await _customerDAL.UpdateAsync(_mapper.Map<Customer>(result));
             CustomerResponseModel customerResponce = _mapper.Map<CustomerResponseModel>(customerEntity);
 
             return customerResponce;

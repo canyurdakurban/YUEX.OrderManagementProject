@@ -63,7 +63,7 @@ namespace YUEX.OrderManagementProject.Repository.EntityFramework
 
         public async Task<TEntity> DeleteAsync(TEntity entity)
         {
-            Context.Entry(entity).State = EntityState.Deleted;
+            Context.Entry(entity).State = EntityState.Modified;
             await Context.SaveChangesAsync();
             return entity;
         }
@@ -98,7 +98,7 @@ namespace YUEX.OrderManagementProject.Repository.EntityFramework
 
         public TEntity Delete(TEntity entity)
         {
-            Context.Entry(entity).State = EntityState.Deleted;
+            Context.Entry(entity).State = EntityState.Modified;
             Context.SaveChanges();
             return entity;
         }

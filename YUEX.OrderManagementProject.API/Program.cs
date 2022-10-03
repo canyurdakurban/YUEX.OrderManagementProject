@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YUEX.OrderManagenetProject.API
+namespace YUEX.OrderManagementProject.API
 {
     public class Program
     {

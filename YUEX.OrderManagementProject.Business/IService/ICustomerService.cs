@@ -12,7 +12,7 @@ namespace YUEX.OrderManagementProject.Business.IService
     {       
         Task<CustomerResponseModel> GetById(int id);
         Task<CustomerResponseModel> Add(CustomerRequestModel request);
-        Task Delete(Customer request);
+        Task Delete(CustomerDeleteModel request);
         Task<CustomerResponseModel> Update(CustomerRequestModel request);
         Task<IList<CustomerResponseModel>> GetAll();
         

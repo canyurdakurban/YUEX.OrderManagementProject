@@ -8,7 +8,7 @@ namespace YUEX.OrderManagementProject.Entities.DTOs.ResponseModel
     public class CustomerResponseModel : IDTO
     {
         public string UserName { get; set; }
-
         public string UserAddress { get; set; }
+        public bool IsActive { get; set; }
     }
 }

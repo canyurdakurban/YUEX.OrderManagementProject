@@ -7,6 +7,7 @@ using YUEX.OrderManagementProject.Entities.DTOs.ResponseModel;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Repository.Abstract;
 using YUEX.OrderManagementProject.Business.IService;
+using System.Threading.Tasks;
 
 namespace YUEX.OrderManagementProject.Business.Service
 {
@@ -24,11 +25,16 @@ namespace YUEX.OrderManagementProject.Business.Service
             _mapper = mapper;
         }
 
-        public void CreateProduct(ProductRequestModel productRequest)
+        public async Task<ProductResponseModel> CreateProduct(ProductRequestModel productRequest)
         {
-            _productRepository.Add(_mapper.Map<Product>(productRequest));
+            Product product = await _productRepository.AddAsync(_mapper.Map<Product>(productRequest));
 
-            _productElasticRepository.AddDocument(_mapper.Map<Product>(productRequest));
+            if (product != null)
+            {
+                _productElasticRepository.AddDocument(_mapper.Map<Product>(productRequest));
+            }            
+
+            return _mapper.Map<ProductResponseModel>(product);
         }
 
         public async void DeleteProduct(int id)
@@ -55,7 +61,7 @@ namespace YUEX.OrderManagementProject.Business.Service
             return _mapper.Map<IList<ProductResponseModel>>(result.Documents);
         }
 
-        public void UpdateProduct(ProductRequestModel productRequest)
+        public Task<ProductResponseModel> UpdateProduct(ProductRequestModel productRequest)
         {
             throw new NotImplementedException();
         }

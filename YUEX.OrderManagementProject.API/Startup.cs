@@ -22,7 +22,7 @@ using YUEX.OrderManagementProject.Business.Rules;
 using YUEX.OrderManagementProject.Business.Service;
 using YUEX.OrderManagementProject.DataAccess.Contexts;
 
-namespace YUEX.OrderManagenetProject.API
+namespace YUEX.OrderManagementProject.API
 {
     public class Startup
     {

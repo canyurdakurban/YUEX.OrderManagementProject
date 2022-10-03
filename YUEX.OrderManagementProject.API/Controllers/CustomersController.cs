@@ -6,7 +6,7 @@ using YUEX.OrderManagementProject.Entities.DTOs.ResponseModel;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Business.IService;
 
-namespace YUEX.OrderManagenetProject.API.Controllers
+namespace YUEX.OrderManagementProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,28 +19,34 @@ namespace YUEX.OrderManagenetProject.API.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetAll")]
         public async Task<IList<CustomerResponseModel>> GetAll()
         {
             return await _customerService.GetAll();
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetbyId")]
         public async Task<CustomerResponseModel> Get([FromQuery] int id)
         {
             return await _customerService.GetById(id);
         }
 
-        [HttpPost]
+        [HttpPost, Route("Create")]
         public async Task Create([FromBody] CustomerRequestModel request)
         {
             await _customerService.Add(request);
         }
 
-        [HttpPut]
+        [HttpPut, Route("Put")]
         public async Task Put([FromBody] CustomerRequestModel request)
         {
             await _customerService.Update(request);
+        }
+
+        [HttpPut, Route("Delete")]
+        public async Task Delete([FromBody] CustomerDeleteModel request)
+        {
+            await _customerService.Delete(request);
         }
     }
 }

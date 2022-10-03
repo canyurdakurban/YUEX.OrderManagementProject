@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{B7B13435-0FC3-4851-8AB9-B59216BC281E}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YUEX.OrderManagementProject.API", "YUEX.OrderManagementProject.API\YUEX.OrderManagementProject.API.csproj", "{93F2FBD6-1E7B-4900-806C-E8A774C4D92C}"
