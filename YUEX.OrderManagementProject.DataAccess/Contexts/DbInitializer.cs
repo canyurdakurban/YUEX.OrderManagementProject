@@ -20,7 +20,7 @@ namespace YUEX.OrderManagementProject.DataAccess.Contexts
             var customer = new Customer[]
             {
                 new Customer {UserName = "Can", UserAddress = "Güneşli", IsActive=true},
-                new Customer {UserName = "Fatih", UserAddress = "Güneşli", IsActive=true},
+                new Customer {UserName = "Fatih", UserAddress = "Konak", IsActive=true},
             };
 
             foreach (Customer item in customer)

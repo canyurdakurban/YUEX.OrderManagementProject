@@ -10,23 +10,29 @@ services:
         depends_on:
             - db
     db:        
-        image: "mcr.microsoft.com/mssql/server"
-        user: root
-        environment:
-            SA_PASSWORD: "P@ssw0rd"
-            ACCEPT_EULA: "Y"
-        ports:
-            - "1434:1433"
+        image: mcr.microsoft.com/mssql/server:2017-CU19-ubuntu-16.04
+        container_name: db
         volumes:
-          - mssql-server:/var/opt/mssql/data
+          - db:/var/lib/mssql
+        environment:
+           - SA_PASSWORD=P@ssw0rd
+           - ACCEPT_EULA=Y
+        ports:
+          - "1433:1433"
+        expose:
+          - '1433'
         restart: always
     eelasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.1.4
         container_name: elasticsearch
         volumes:
           - ./esdata:/usr/share/elasticsearch/data
-        environment:
+        environment:              
           - discovery.type=single-node
+          - cluster.routing.allocation.disk.threshold_enabled=false
+          - bootstrap.memory_lock=true
+          - action.destructive_requires_name=false
+          - ES_JAVA_OPTS=-Xms512m -Xmx512m           
         ulimits:
           memlock:
             soft: -1
@@ -46,4 +52,4 @@ volumes:
         type: 'none'
         o: 'bind'
         device: './'
-  mssql-server:
+  db:

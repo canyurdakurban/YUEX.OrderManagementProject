@@ -1,18 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using YUEX.OrderManagementProject.Entities.DTOs.RequestModel;
 using YUEX.OrderManagementProject.Repository.Abstract;
 using YUEX.OrderManagementProject.Repository.ElasticSearch;
 using YUEX.OrderManagementProject.Repository.EntityFramework;
@@ -21,6 +12,15 @@ using YUEX.OrderManagementProject.Business.Mapper;
 using YUEX.OrderManagementProject.Business.Rules;
 using YUEX.OrderManagementProject.Business.Service;
 using YUEX.OrderManagementProject.DataAccess.Contexts;
+using YUEX.OrderManagementProject.Business.Exceptions;
+using FluentValidation.AspNetCore;
+using System.Reflection;
+using FluentValidation;
+using YUEX.OrderManagementProject.Entities.Entities;
+using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer;
+using YUEX.OrderManagementProject.Business.Validator;
+using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Order;
+using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Product;
 
 namespace YUEX.OrderManagementProject.API
 {
@@ -53,7 +53,26 @@ namespace YUEX.OrderManagementProject.API
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderService, OrderService>();
 
-            services.AddControllers();
+
+            //Fluent validator
+            services.AddScoped<IValidator<CustomerInsertRequestModel>, CustomerInsertValidator>();
+            services.AddScoped<IValidator<CustomerUpdateRequestModel>, CustomerUpdateValidator>();
+            services.AddScoped<IValidator<OrderInsertRequestModel>, OrderInsertValidator>();
+            services.AddScoped<IValidator<OrderUpdateRequestModel>, OrderUpdateValidator>();
+            services.AddScoped<IValidator<ProductInsertRequestModel>, ProductInsertValidator>();
+            services.AddScoped<IValidator<ProductUpdateRequestModel>, ProductUpdateValidator>();
+
+
+            services.AddControllers().AddFluentValidation(fv =>
+            {
+                fv.ImplicitlyValidateChildProperties = true;
+                fv.ImplicitlyValidateRootCollectionElements = true;
+
+                fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+                // Other way to register validators
+                //fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+            }); ;
 
             services.AddSwaggerGen(c =>
             {
@@ -70,6 +89,8 @@ namespace YUEX.OrderManagementProject.API
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YUEX.OrderManagement.API v1"));
 
             app.UseHttpsRedirection();
+
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseRouting();
 

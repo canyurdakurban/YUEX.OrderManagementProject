@@ -8,6 +8,8 @@ using YUEX.OrderManagementProject.Repository.Abstract;
 using YUEX.OrderManagementProject.Business.IService;
 using YUEX.OrderManagementProject.Business.Rules;
 using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Order;
+using System.Collections;
+using System.Linq;
 
 namespace YUEX.OrderManagementProject.Business.Service
 {
@@ -54,8 +56,7 @@ namespace YUEX.OrderManagementProject.Business.Service
         {
             var result = await GetByIdInternal(request.Id);
 
-            
-
+            ///
 
             Order orderEntity = await _orderDAL.UpdateAsync(result);
             OrderResponseModel orderResponce = _mapper.Map<OrderResponseModel>(orderEntity);

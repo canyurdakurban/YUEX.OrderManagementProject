@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YUEX.OrderManagementProject.Business.IService;
@@ -41,12 +42,20 @@ namespace YUEX.OrderManagementProject.API.Controllers
         [HttpPost, Route("Create")]
         public async Task Create([FromBody] ProductInsertRequestModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationException("Model state is not valid");
+            }
             await _productService.CreateProduct(request);
         }
 
         [HttpPut, Route("Put")]
         public async Task Put([FromBody] ProductUpdateRequestModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationException("Model state is not valid");
+            }
             await _productService.UpdateProduct(request);
         }
 

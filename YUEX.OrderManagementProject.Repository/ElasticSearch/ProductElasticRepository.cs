@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using YUEX.OrderManagementProject.Entities.ElasticDto;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Repository.Abstract;
@@ -22,9 +23,9 @@ namespace YUEX.OrderManagementProject.Repository.ElasticSearch
                         .DefaultIndex("product_index"));
         }
 
-        public void AddDocument(Product doc)
+        public async Task AddDocument(Product doc)
         {
-           var result=  _elasticClient.Index(doc, idx => idx.Index("product_index"));
+            var result = await _elasticClient.IndexAsync(doc, idx => idx.Index("product_index"));
         }
 
         public bool DeleteDocument(int id)
@@ -39,13 +40,15 @@ namespace YUEX.OrderManagementProject.Repository.ElasticSearch
 
         public ISearchResponse<ProductElasticDto> Search(string text)
         {
+
+
             var searchResult = _elasticClient.Search<ProductElasticDto>(s => s
                 .Query(q => q
                 .QueryString(qs => qs
                 .Query(text)
                 .Fields(f => f
-                    .Field(fx =>fx.BarcodeNumber)
-                ))));
+                    .Field(fx => fx.BarcodeNumber)
+                ))).Size(3).TotalHitsAsInteger(true));
 
             return searchResult;
         }

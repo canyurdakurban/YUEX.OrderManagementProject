@@ -8,6 +8,10 @@ using YUEX.OrderManagementProject.Repository.Abstract;
 using YUEX.OrderManagementProject.Business.IService;
 using System.Threading.Tasks;
 using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Product;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
+using YUEX.OrderManagementProject.Business.Exceptions;
 
 namespace YUEX.OrderManagementProject.Business.Service
 {
@@ -16,13 +20,15 @@ namespace YUEX.OrderManagementProject.Business.Service
         private readonly IProductRepository _productRepository;
         private readonly IProductElasticRepository _productElasticRepository;
         private readonly IMapper _mapper;
-        public ProductService(IProductRepository productRepository, 
+        
+        public ProductService(IProductRepository productRepository,
                               IProductElasticRepository productElasticRepository,
                               IMapper mapper)
         {
             _productRepository = productRepository;
             _productElasticRepository = productElasticRepository;
             _mapper = mapper;
+            
         }
 
         public async Task<ProductResponseModel> CreateProduct(ProductInsertRequestModel productRequest)
@@ -30,10 +36,11 @@ namespace YUEX.OrderManagementProject.Business.Service
             Product product = _mapper.Map<Product>(productRequest);
             product.IsActive = true;
             product = await _productRepository.AddAsync(product);
-
+            
             if (product != null)
             {
-                _productElasticRepository.AddDocument(_mapper.Map<Product>(product));
+               await _productElasticRepository.AddDocument(_mapper.Map<Product>(product));
+                
             }            
 
             return _mapper.Map<ProductResponseModel>(product);

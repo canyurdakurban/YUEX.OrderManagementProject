@@ -5,6 +5,8 @@ using YUEX.OrderManagementProject.Entities.DTOs.ResponseModel;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Business.IService;
 using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer;
+using System;
+using FluentValidation;
 
 namespace YUEX.OrderManagementProject.API.Controllers
 {
@@ -34,12 +36,20 @@ namespace YUEX.OrderManagementProject.API.Controllers
         [HttpPost, Route("Create")]
         public async Task Create([FromBody] CustomerInsertRequestModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationException("Model state is not valid");
+            }
             await _customerService.Add(request);
         }
 
         [HttpPut, Route("Put")]
         public async Task Put([FromBody] CustomerUpdateRequestModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ValidationException("Model state is not valid");
+            }
             await _customerService.Update(request);
         }
 
