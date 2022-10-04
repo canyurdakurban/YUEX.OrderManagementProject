@@ -6,6 +6,7 @@ using YUEX.OrderManagementProject.Entities.IEntities;
 
 namespace YUEX.OrderManagementProject.Entities.Entities
 {
+    [Serializable]
     public class BaseEntity : IEntity
     {
         [Key]

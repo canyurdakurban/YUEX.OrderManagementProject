@@ -1,7 +1,9 @@
 ﻿using Nest;
+using System;
 
 namespace YUEX.OrderManagementProject.Entities.ElasticDto
 {
+    [Serializable]
     public class ProductElasticDto 
     {
         public string BarcodeNumber { get; set; }

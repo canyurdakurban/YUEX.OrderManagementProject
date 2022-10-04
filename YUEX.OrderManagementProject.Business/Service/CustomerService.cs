@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using YUEX.OrderManagementProject.Entities.DTOs.RequestModel;
 using YUEX.OrderManagementProject.Entities.DTOs.ResponseModel;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Repository.Abstract;
 using YUEX.OrderManagementProject.Business.IService;
 using YUEX.OrderManagementProject.Business.Rules;
+using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer;
 
 namespace YUEX.OrderManagementProject.Business.Service
 {
@@ -24,7 +24,7 @@ namespace YUEX.OrderManagementProject.Business.Service
             _mapper = mapper;
         }
 
-        public async Task<CustomerResponseModel> Add(CustomerRequestModel request)
+        public async Task<CustomerResponseModel> Add(CustomerInsertRequestModel request)
         {
             bool IsDuplicated = await _businessRules.CustomerNameCanNotDuplicated(request.UserName);
 
@@ -45,11 +45,11 @@ namespace YUEX.OrderManagementProject.Business.Service
 
         }
         
-        public async Task Delete(CustomerDeleteModel request)
+        public async Task Delete(CustomerDeleteRequestModel request)
         {
-            var result = await GetById(request.Id);
+            var result = await GetByIdInternal(request.Id);
             result.IsActive = false;
-            _customerDAL.Delete(_mapper.Map<Customer>(result));
+            _customerDAL.Delete(result);
         }
 
         public async Task<IList<CustomerResponseModel>> GetAll()
@@ -62,14 +62,22 @@ namespace YUEX.OrderManagementProject.Business.Service
             return _mapper.Map<CustomerResponseModel>(await _customerDAL.GetAsync(x=>x.Id == id));
         }
 
-        public async Task<CustomerResponseModel> Update(CustomerRequestModel request)
+        public async Task<CustomerResponseModel> Update(CustomerUpdateRequestModel request)
         {
-            var result = await GetById(request.Id);
+            var result = await GetByIdInternal(request.Id);
 
-            Customer customerEntity = await _customerDAL.UpdateAsync(_mapper.Map<Customer>(result));
+            result.UserName = request.UserName;
+            result.UserAddress = request.UserAddress;
+
+            Customer customerEntity = await _customerDAL.UpdateAsync(result);
             CustomerResponseModel customerResponce = _mapper.Map<CustomerResponseModel>(customerEntity);
 
             return customerResponce;
+        }
+
+        public async Task<Customer> GetByIdInternal(int id)
+        {
+            return await _customerDAL.GetAsync(x => x.Id == id);
         }
     }
 }

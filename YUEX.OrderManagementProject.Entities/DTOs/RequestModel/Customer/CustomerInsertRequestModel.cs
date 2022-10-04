@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using YUEX.OrderManagementProject.Entities.IEntities;
 
-namespace YUEX.OrderManagementProject.Entities.DTOs.RequestModel
+namespace YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer
 {
-    public class CustomerRequestModel : IDTO
+    public class CustomerInsertRequestModel : IDTO
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
         public string UserAddress { get; set; }
     }

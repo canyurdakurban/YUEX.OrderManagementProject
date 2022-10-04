@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using YUEX.OrderManagementProject.Entities.DTOs.RequestModel;
 using YUEX.OrderManagementProject.Entities.DTOs.ResponseModel;
 using YUEX.OrderManagementProject.Entities.Entities;
 using YUEX.OrderManagementProject.Business.IService;
+using YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer;
 
 namespace YUEX.OrderManagementProject.API.Controllers
 {
@@ -32,19 +32,19 @@ namespace YUEX.OrderManagementProject.API.Controllers
         }
 
         [HttpPost, Route("Create")]
-        public async Task Create([FromBody] CustomerRequestModel request)
+        public async Task Create([FromBody] CustomerInsertRequestModel request)
         {
             await _customerService.Add(request);
         }
 
         [HttpPut, Route("Put")]
-        public async Task Put([FromBody] CustomerRequestModel request)
+        public async Task Put([FromBody] CustomerUpdateRequestModel request)
         {
             await _customerService.Update(request);
         }
 
-        [HttpPut, Route("Delete")]
-        public async Task Delete([FromBody] CustomerDeleteModel request)
+        [HttpDelete, Route("Delete")]
+        public async Task Delete([FromBody] CustomerDeleteRequestModel request)
         {
             await _customerService.Delete(request);
         }

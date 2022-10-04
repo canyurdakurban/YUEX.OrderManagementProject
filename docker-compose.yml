@@ -10,17 +10,15 @@ services:
         depends_on:
             - db
     db:        
-        image: mcr.microsoft.com/mssql/server:2017-CU19-ubuntu-16.04
-        container_name: db
-        volumes:
-            - db:/var/lib/mssql
-        environment:       
-            - SA_PASSWORD=P@ssw0rd
-            - ACCEPT_EULA=Y
+        image: "mcr.microsoft.com/mssql/server"
+        user: root
+        environment:
+            SA_PASSWORD: "P@ssw0rd"
+            ACCEPT_EULA: "Y"
         ports:
-            - "1433:1433"
-        expose:
-            - '1433'
+            - "1434:1433"
+        volumes:
+          - mssql-server:/var/opt/mssql/data
         restart: always
     eelasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
@@ -28,7 +26,6 @@ services:
         volumes:
           - ./esdata:/usr/share/elasticsearch/data
         environment:
-          - xpack.security.enabled=false
           - discovery.type=single-node
         ulimits:
           memlock:
@@ -49,4 +46,4 @@ volumes:
         type: 'none'
         o: 'bind'
         device: './'
-  db:
+  mssql-server:

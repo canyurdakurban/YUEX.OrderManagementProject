@@ -5,10 +5,10 @@ using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using YUEX.OrderManagementProject.Entities.IEntities;
 
-namespace YUEX.OrderManagementProject.Entities.DTOs.RequestModel
+namespace YUEX.OrderManagementProject.Entities.DTOs.RequestModel.Customer
 {
-    public class CustomerDeleteModel : IDTO
+    public class CustomerDeleteRequestModel : IDTO
     {
-        public int Id { get; set; }        
+        public int Id { get; set; }
     }
 }
